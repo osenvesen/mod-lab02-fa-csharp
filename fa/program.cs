@@ -41,7 +41,7 @@ public class FA1
             a.Transitions['0'] = b;
             a.Transitions['1'] = a;
             b.Transitions['0'] = b;
-            b.Transitions['1'] = c;
+            b.Transitions['1'] = b;
             c.Transitions['0'] = c;
             c.Transitions['1'] = c;
         }
