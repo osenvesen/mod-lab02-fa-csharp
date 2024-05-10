@@ -41,7 +41,7 @@ public class FA1
             a.Transitions['0'] = b;
             a.Transitions['1'] = a;
             b.Transitions['0'] = b;
-            b.Transitions['1'] = b;
+            b.Transitions['1'] = с;
             c.Transitions['0'] = c;
             c.Transitions['1'] = c;
         }
@@ -70,7 +70,7 @@ public class FA1
         public State b = new State()
         {
             Name = "b",
-            IsAcceptState = false,
+            IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
         public State c = new State()
@@ -79,17 +79,26 @@ public class FA1
             IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
+       public State d = new State()
+        {
+            Name = "d",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
 
         State InitialState = a;
         
         public FA2()
         {
             a.Transitions['0'] = b;
-            a.Transitions['1'] = a;
-            b.Transitions['0'] = b;
-            b.Transitions['1'] = b;
-            c.Transitions['0'] = c;
-            c.Transitions['1'] = c;
+            a.Transitions['1'] = c;
+            b.Transitions['0'] = a;
+            b.Transitions['1'] = d;
+            c.Transitions['0'] = d;
+            c.Transitions['1'] = a;
+            d.Transitions['0'] = c;
+            d.Transitions['1'] = b;
+          
         }
         
         public bool? Run(IEnumerable<char> s)
@@ -132,9 +141,9 @@ public class FA1
         {
             a.Transitions['0'] = a;
             a.Transitions['1'] = b;
-            b.Transitions['0'] = c;
-            b.Transitions['1'] = a;
-            c.Transitions['0'] = b;
+            b.Transitions['0'] = a;
+            b.Transitions['1'] = c;
+            c.Transitions['0'] = c;
             c.Transitions['1'] = c;
         }
         
