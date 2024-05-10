@@ -24,13 +24,13 @@ public class FA1
         public State b = new State()
         {
             Name = "b",
-            IsAcceptState = true,
+            IsAcceptState = false,
             Transitions = new Dictionary<char, State>()
         };
         public State c = new State()
         {
             Name = "c",
-            IsAcceptState = false,
+            IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
 
@@ -41,7 +41,7 @@ public class FA1
             a.Transitions['0'] = b;
             a.Transitions['1'] = a;
             b.Transitions['0'] = b;
-            b.Transitions['1'] = b;
+            b.Transitions['1'] = c;
             c.Transitions['0'] = c;
             c.Transitions['1'] = c;
         }
@@ -54,8 +54,10 @@ public class FA1
                 current = current.Transitions[c];
                 if (current == null)
                     return null;
+              if (c == '0') containsZero = true;
+              else if (c == '1') containsOne = true;
             }
-            return current.IsAcceptState;
+            return current == c && containsZero && containsOne;
         }
     }
 
