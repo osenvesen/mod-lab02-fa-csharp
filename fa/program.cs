@@ -33,33 +33,38 @@ public class FA1
             IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
-
-        State InitialState = a;
+        public State d = new State()
+        {
+            Name = "d",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        
+  State InitialState = a;
         
         public FA1()
         {
             a.Transitions['0'] = b;
-            a.Transitions['1'] = a;
-            b.Transitions['0'] = b;
+            a.Transitions['1'] = d;
+            b.Transitions['0'] = d;
             b.Transitions['1'] = c;
-            c.Transitions['0'] = c;
+            c.Transitions['0'] = d;
             c.Transitions['1'] = c;
+            d.Transitions['0'] = d;
+            d.Transitions['1'] = d;
         }
         
         public bool? Run(IEnumerable<char> s)
         {
             State current = InitialState;
-            bool containsZero = false;
-            bool containsOne = false;
             foreach (var c in s)
             {
                 current = current.Transitions[c];
                 if (current == null)
                     return null;
-              if (c == '0') containsZero = true;
-              else if (c == '1') containsOne = true;
+  
             }
-            return current == c && containsZero && containsOne;
+            return current.IsAcceptState;
         }
     }
 
