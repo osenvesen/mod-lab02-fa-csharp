@@ -49,6 +49,8 @@ public class FA1
         public bool? Run(IEnumerable<char> s)
         {
             State current = InitialState;
+            bool containsZero = false;
+            bool containsOne = false;
             foreach (var c in s)
             {
                 current = current.Transitions[c];
