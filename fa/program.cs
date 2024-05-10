@@ -24,13 +24,13 @@ public class FA1
         public State b = new State()
         {
             Name = "b",
-            IsAcceptState = false,
+            IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
         public State c = new State()
         {
             Name = "c",
-            IsAcceptState = true,
+            IsAcceptState = false,
             Transitions = new Dictionary<char, State>()
         };
 
@@ -82,7 +82,7 @@ public class FA1
        public State d = new State()
         {
             Name = "d",
-            IsAcceptState = false,
+            IsAcceptState = true,
             Transitions = new Dictionary<char, State>()
         };
 
