@@ -30,7 +30,7 @@ public class FA1
         public State c = new State()
         {
             Name = "c",
-            IsAcceptState = true,
+            IsAcceptState = false,
             Transitions = new Dictionary<char, State>()
         };
 
