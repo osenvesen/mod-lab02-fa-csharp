@@ -1,4 +1,4 @@
-using System;
+  using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,37 +6,102 @@ using System.Threading.Tasks;
 
 namespace fans
 {
-  public class State
-  {
-    public string Name;
-    public Dictionary<char, State> Transitions;
-    public bool IsAcceptState;
-  }
+ public class State
+{
+public string Name;
+public Dictionary<char, State> Transitions;
+public bool IsAcceptState;
+}
+
+public class FA
+{
+public static State a = new State()
+{
+Name = "a",
+IsAcceptState = false,
+Transitions = new Dictionary<char, State>()
+};
+public State b = new State()
+{
+Name = "b",
+IsAcceptState = false,
+Transitions = new Dictionary<char, State>()
+};
+public State c = new State()
+{
+Name = "c",
+IsAcceptState = true,
+Transitions = new Dictionary<char, State>()
+};
+
+State InitialState;
+
+public FA()
+{
+a.Transitions['0'] = a;
+a.Transitions['1'] = b;
+b.Transitions['0'] = c;
+b.Transitions['1'] = a;
+c.Transitions['0'] = b;
+c.Transitions['1'] = c;
+
+InitialState = a;
+}
+
+public bool? Run(IEnumerable<char> s)
+{
+State current = InitialState;
+foreach (var c in s)
+{
+current = current.Transitions[c];
+if (current == null)
+return null;
+}
+return current.IsAcceptState;
+}
+}
+
+public class FA1 : FA
+{
+public FA1()
+{
+a.Transitions['0'] = b;
+a.Transitions['1'] = c;
+b.Transitions['0'] = b;
+b.Transitions['1'] = b;
+c.Transitions['0'] = c;
+c.Transitions['1'] = c;
+}
+}
+
+public class FA2 : FA
+{
+public FA2()
+{
+a.Transitions['0'] = b;
+a.Transitions['1'] = c;
+b.Transitions['0'] = c;
+b.Transitions['1'] = b;
+c.Transitions['0'] = b;
+c.Transitions['1'] = c;
+}
+}
+
+public class FA3 : FA
+{
+public FA3()
+{
+a.Transitions['0'] = b;
+a.Transitions['1'] = a;
+b.Transitions['0'] = b;
+b.Transitions['1'] = c;
+c.Transitions['0'] = b;
+c.Transitions['1'] = c;
+}
+}
 
 
-  public class FA1
-  {
-    public bool? Run(IEnumerable<char> s)
-    {
-      return false;
-    }
-  }
 
-  public class FA2
-  {
-    public bool? Run(IEnumerable<char> s)
-    {
-      return false;
-    }
-  }
-  
-  public class FA3
-  {
-    public bool? Run(IEnumerable<char> s)
-    {
-      return false;
-    }
-  }
 
   class Program
   {
